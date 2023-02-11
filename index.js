@@ -94,9 +94,8 @@ app.post("/books/", async (request, response) => {
 
 //Update Book API
 
-app.put("/books/bookId:", async (request, response) => {
-  const bookId = request.params;
-  const bookDetails = request.body;
+app.put("/books/:bookId:", async (request, response) => {
+  const { bookId } = request.params;
   const bookDetails = request.body;
   const {
     title,
@@ -128,6 +127,7 @@ app.put("/books/bookId:", async (request, response) => {
       online_stores='${onlineStores}'
     WHERE
       book_id = ${bookId};`;
+
   await db.run(updateBookQuery);
-  response.send("Book Updated Successfully!");
+  response.send("Book updated successfully!");
 });
